@@ -13,7 +13,7 @@ text : <input type="text" id="text"><br>
 <script>
 function xxx(){
 var sum = [] ; 
-//var str = "1+23+((9+9)*3)/3";
+//var str = "1+23+9+9*3/3";
 var str = document.getElementById("text").value;
 
 //document.getElementById("sum1").innerHTML = res;
