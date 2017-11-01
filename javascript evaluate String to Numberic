@@ -1,0 +1,91 @@
+evaluate String to Numberic
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+text : <input type="text" id="text"><br>
+<button onclick=xxx()>xxx</button>
+<p id="sum1"></p>
+<p id="sum"></p>
+
+<script>
+function xxx(){
+var sum = [] ; 
+//var str = "1+23+((9+9)*3)/3";
+var str = document.getElementById("text").value;
+
+//document.getElementById("sum1").innerHTML = res;
+
+
+
+
+
+var splt = str.split("");
+var tokenp = 0 ;
+var tokenm = 0 ;
+var tokenx = 0 ;
+var tokenh = 0 ;
+
+var dummy = "";
+for(var token  = 0 ; token < splt.length ; token ++){
+	if(splt[token] == "+"){tokenp++;}
+    if(splt[token] == "-"){tokenm++;}
+    if(splt[token] == "*"){tokenx++;}
+    if(splt[token] == "/"){tokenh++;}
+	
+    if(splt[token] == "+"||splt[token] == "-"||splt[token] == "*"||splt[token] == "/"){
+    	sum.push(dummy);
+        sum.push(splt[token]);
+        dummy = "";
+    }else{
+    	dummy += splt[token]
+    }
+    
+    if(token == splt.length-1){
+    	sum.push(dummy);
+    }
+
+}
+
+
+	for(var symbol = 0 ; symbol < tokenx ; symbol++){
+    	for(var findx = 0 ; findx < sum.length ; findx++){
+        	if(sum[findx]=="*"){
+            	sum.splice(findx-1,3,(String(parseFloat(sum[findx-1] * sum[findx+1]))))
+            }
+        }
+    }
+	for(var symbol = 0 ; symbol < tokenh ; symbol++){
+    	for(var findh = 0 ; findh < sum.length ; findh++){
+        	if(sum[findh]=="/"){
+            	sum.splice(findh-1,3,(String(parseFloat(sum[findh-1] / sum[findh+1]))))
+            }
+        }
+    }
+	for(var symbol = 0 ; symbol < tokenp ; symbol++){
+    	for(var findp = 0 ; findp < sum.length ; findp++){
+        	if(sum[findp]=="+"){
+            	sum.splice(findp-1,3,(String(parseFloat(sum[findp-1]) + parseFloat(sum[findp+1]))))
+            }
+        }
+    }
+	for(var symbol = 0 ; symbol < tokenm ; symbol++){
+    	for(var findm = 0 ; findm < sum.length ; findm++){
+        	if(sum[findm]=="-"){
+            	sum.splice(findm-1,3,(String(parseFloat(sum[findm-1]) - parseFloat(sum[findm+1]))))
+            }
+        }
+    }    
+
+            	
+
+
+document.getElementById("sum").innerHTML = sum;
+
+}
+</script>
+
+</body>
+</html>
